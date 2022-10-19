@@ -17,6 +17,7 @@
             <column width="350px">
                 <textField id="nameField" property="name"/>
                 <textField id="phoneCodeField" property="phoneCode"/>
+                <checkBox id="defaultCityField" property="defaultCity"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

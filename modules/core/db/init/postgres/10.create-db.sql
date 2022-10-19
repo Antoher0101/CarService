@@ -11,6 +11,7 @@ create table CARSERVICE_CITY (
     --
     NAME varchar(255) not null,
     PHONE_CODE varchar(255) not null,
+    DEFAULT_CITY boolean not null,
     --
     primary key (ID)
 )^

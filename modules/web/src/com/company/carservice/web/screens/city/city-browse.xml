@@ -35,6 +35,7 @@
             <columns>
                 <column id="name"/>
                 <column id="phoneCode"/>
+                <column id="defaultCity"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
