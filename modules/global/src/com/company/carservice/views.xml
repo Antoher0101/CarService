@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
 
+    <view entity="carservice_CarService" name="carService-with-employee" extends="_local">
+        <property name="employee" view="_local"/>
+    </view>
+    <view entity="carservice_CarService" name="carService-with-city" extends="_local">
+        <property name="city" view="_local"/>
+    </view>
 </views>

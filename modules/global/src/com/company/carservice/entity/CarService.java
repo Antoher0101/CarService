@@ -1,12 +1,16 @@
 package com.company.carservice.entity;
 
+import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
+import com.haulmont.cuba.core.entity.annotation.Lookup;
+import com.haulmont.cuba.core.entity.annotation.LookupType;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Table(name = "CARSERVICE_CAR_SERVICE")
 @Entity(name = "carservice_CarService")
@@ -30,7 +34,21 @@ public class CarService extends StandardEntity {
     @OnDelete(DeletePolicy.CASCADE)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "CITY_ID")
+    @Lookup(type = LookupType.DROPDOWN, actions = {"lookup", "open"})
     private City city;
+
+    @OnDelete(DeletePolicy.CASCADE)
+    @OneToMany(mappedBy = "carService")
+    @Composition
+    private List<Employee> employee;
+
+    public void setEmployee(List<Employee> employee) {
+        this.employee = employee;
+    }
+
+    public List<Employee> getEmployee() {
+        return employee;
+    }
 
     public City getCity() {
         return city;

@@ -1,0 +1,3 @@
+alter table CARSERVICE_CAR_SERVICE rename column employee_id to employee_id__u80654 ;
+alter table CARSERVICE_CAR_SERVICE drop constraint FK_CARSERVICE_CAR_SERVICE_ON_EMPLOYEE ;
+drop index IDX_CARSERVICE_CAR_SERVICE_ON_EMPLOYEE ;

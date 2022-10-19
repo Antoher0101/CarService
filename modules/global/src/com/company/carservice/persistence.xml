@@ -4,5 +4,6 @@
 
         <class>com.company.carservice.entity.City</class>
         <class>com.company.carservice.entity.CarService</class>
+        <class>com.company.carservice.entity.Employee</class>
     </persistence-unit>
 </persistence>
