@@ -2,12 +2,14 @@ package com.company.carservice.entity;
 
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
+import com.haulmont.cuba.core.entity.annotation.PublishEntityChangedEvents;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+@PublishEntityChangedEvents
 @Table(name = "CARSERVICE_CITY")
 @Entity(name = "carservice_City")
 @NamePattern("%s|name")
