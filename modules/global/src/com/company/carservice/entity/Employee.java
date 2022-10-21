@@ -2,8 +2,6 @@ package com.company.carservice.entity;
 
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
-import com.haulmont.cuba.core.entity.annotation.OnDelete;
-import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -37,7 +35,6 @@ public class Employee extends StandardEntity {
     @Email
     private String email;
 
-    @OnDelete(DeletePolicy.CASCADE)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CAR_SERVICE_ID")
     private CarService carService;

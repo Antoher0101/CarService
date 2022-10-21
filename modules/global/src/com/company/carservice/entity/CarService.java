@@ -31,7 +31,6 @@ public class CarService extends StandardEntity {
     private String phoneNumber;
 
     @NotNull
-    @OnDelete(DeletePolicy.CASCADE)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "CITY_ID")
     @Lookup(type = LookupType.DROPDOWN, actions = {"lookup", "open"})

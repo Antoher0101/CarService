@@ -6,7 +6,7 @@
     <data>
         <instance id="carServiceDc"
                   class="com.company.carservice.entity.CarService">
-            <view extends="carService-with-employee">
+            <view extends="carService-edit">
                 <property name="city" view="_minimal"/>
             </view>
             <loader/>
