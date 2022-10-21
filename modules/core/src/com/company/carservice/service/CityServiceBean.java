@@ -1,6 +1,5 @@
 package com.company.carservice.service;
 
-import com.company.carservice.entity.CarService;
 import com.company.carservice.entity.City;
 import com.haulmont.cuba.core.EntityManager;
 import com.haulmont.cuba.core.Persistence;
@@ -39,8 +38,8 @@ public class CityServiceBean implements CityService {
             EntityManager em = persistence.getEntityManager();
 
             Query query = em.createQuery(
-                    "select c from carservice_City c where c.defaultCity = 't' and c <> :changedCity")
-                    .setParameter("changedCity", changedCity);
+                    "select c from carservice_City c where c.defaultCity = 't' and c <> :changedCity");
+            query.setParameter("changedCity", changedCity);
             List<City> resultList = (List<City>) query.getResultList();
             for (City city : resultList) {
                 city.setDefaultCity(false);
