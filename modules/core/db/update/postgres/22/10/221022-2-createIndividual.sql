@@ -1,0 +1,1 @@
+alter table CARSERVICE_INDIVIDUAL add constraint FK_CARSERVICE_INDIVIDUAL_ON_ID foreign key (ID) references CARSERVICE_COUNTERPARTY(ID) on delete CASCADE;
