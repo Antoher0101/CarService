@@ -41,6 +41,18 @@ public class CarService extends StandardEntity {
     @Composition
     private List<Employee> employee;
 
+    @Composition
+    @OneToMany(mappedBy = "carService")
+    private List<Repair> repair;
+
+    public List<Repair> getRepair() {
+        return repair;
+    }
+
+    public void setRepair(List<Repair> repair) {
+        this.repair = repair;
+    }
+
     public void setEmployee(List<Employee> employee) {
         this.employee = employee;
     }

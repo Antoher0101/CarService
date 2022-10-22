@@ -1,5 +1,6 @@
 package com.company.carservice.entity;
 
+import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 
@@ -8,6 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Table(name = "CARSERVICE_EMPLOYEE")
 @Entity(name = "carservice_Employee")
@@ -38,6 +40,18 @@ public class Employee extends StandardEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CAR_SERVICE_ID")
     private CarService carService;
+
+    @Composition
+    @OneToMany(mappedBy = "employee")
+    private List<Repair> repair;
+
+    public List<Repair> getRepair() {
+        return repair;
+    }
+
+    public void setRepair(List<Repair> repair) {
+        this.repair = repair;
+    }
 
     public CarService getCarService() {
         return carService;
