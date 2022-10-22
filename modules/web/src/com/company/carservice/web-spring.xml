@@ -12,6 +12,7 @@
         <property name="remoteServices">
             <map>
                 <entry key="carservice_CityService" value="com.company.carservice.service.CityService"/>
+                <entry key="carservice_CarService" value="com.company.carservice.service.CarServiceService"/>
             </map>
         </property>
     </bean>
