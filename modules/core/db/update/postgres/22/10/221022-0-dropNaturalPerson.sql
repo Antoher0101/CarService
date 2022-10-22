@@ -1,0 +1,1 @@
+alter table carservice_natural_person rename to CARSERVICE_NATURAL_PERSON__U08880 ;

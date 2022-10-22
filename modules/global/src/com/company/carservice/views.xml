@@ -8,8 +8,9 @@
         <property name="city" view="_local"/>
     </view>
     <view entity="carservice_CarService" name="carService-edit" extends="_local">
-        <property name="city" view="_local"/>
+        <property name="city" view="_minimal"/>
         <property name="employee" view="_local"/>
+        <property name="counterparties" view="_local"/>
     </view>
     <view entity="carservice_Repair" name="repair-view" extends="_local">
         <property name="carService" view="_minimal"/>
