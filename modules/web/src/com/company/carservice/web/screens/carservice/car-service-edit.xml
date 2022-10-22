@@ -63,11 +63,11 @@
                 <groupTable id="counterpartiesTable" width="100%" dataContainer="counterpartiesDc">
                     <actions>
                         <action id="add" type="add"/>
-                        <action id="edit" type="edit"/>
+                        <action id="exclude" type="exclude"/>
                     </actions>
                     <buttonsPanel alwaysVisible="true">
                         <button id="counterpartiesTableAddBtn" action="counterpartiesTable.add"/>
-                        <button id="counterpartiesTableEditBtn" action="counterpartiesTable.edit"/>
+                        <button id="counterpartiesTableEditBtn" action="counterpartiesTable.exclude"/>
                     </buttonsPanel>
                     <columns>
                         <column id="name"/>

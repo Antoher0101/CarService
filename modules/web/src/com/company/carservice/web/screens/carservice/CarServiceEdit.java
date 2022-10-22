@@ -2,11 +2,14 @@ package com.company.carservice.web.screens.carservice;
 
 import com.company.carservice.entity.CarService;
 import com.company.carservice.entity.City;
+import com.company.carservice.entity.Counterparty;
 import com.company.carservice.service.CityService;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.gui.actions.picker.LookupAction;
 import com.haulmont.cuba.gui.components.Component;
 import com.haulmont.cuba.gui.components.LookupPickerField;
+import com.haulmont.cuba.gui.components.TabSheet;
+import com.haulmont.cuba.gui.components.VBoxLayout;
 import com.haulmont.cuba.gui.model.CollectionContainer;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.screen.*;
@@ -28,6 +31,12 @@ public class CarServiceEdit extends StandardEditor<CarService> {
     private LookupPickerField<City> cityField;
     @Inject
     private CollectionContainer<City> citiesDc;
+    @Named("carServiceEditTabSheet.clientsTab")
+    private VBoxLayout clientsTab;
+    @Inject
+    private MessageBundle messageBundle;
+    @Inject
+    private TabSheet carServiceEditTabSheet;
 
     @Subscribe
     public void onInitEntity(InitEntityEvent<CarService> event) {
@@ -35,5 +44,12 @@ public class CarServiceEdit extends StandardEditor<CarService> {
 
         if (defaultCity != null)
             event.getEntity().setCity(defaultCity);
+    }
+
+    @Subscribe(id = "counterpartiesDc", target = Target.DATA_CONTAINER)
+    public void onCounterpartiesDcCollectionChange(CollectionContainer.CollectionChangeEvent<Counterparty> event) {
+        String newCaption = messageBundle.getMessage("clientsTab.caption") +
+                " (" + event.getSource().getItems().size() + ")";
+        carServiceEditTabSheet.getTab("clientsTab").setCaption(newCaption);
     }
 }
