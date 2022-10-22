@@ -1,42 +1,56 @@
 package com.company.carservice.web.screens.carservice;
 
-import com.company.carservice.entity.CarService;
-import com.company.carservice.entity.City;
-import com.company.carservice.entity.Counterparty;
+import com.company.carservice.entity.*;
 import com.company.carservice.service.CityService;
-import com.haulmont.cuba.core.global.DataManager;
-import com.haulmont.cuba.gui.actions.picker.LookupAction;
-import com.haulmont.cuba.gui.components.Component;
-import com.haulmont.cuba.gui.components.LookupPickerField;
-import com.haulmont.cuba.gui.components.TabSheet;
-import com.haulmont.cuba.gui.components.VBoxLayout;
+import com.haulmont.cuba.core.global.GlobalConfig;
+import com.haulmont.cuba.core.global.Messages;
+import com.haulmont.cuba.gui.UiComponents;
+import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.model.CollectionContainer;
-import com.haulmont.cuba.gui.model.CollectionLoader;
+import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
 import com.haulmont.cuba.gui.screen.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
-import javax.inject.Named;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @UiController("carservice_CarService.edit")
 @UiDescriptor("car-service-edit.xml")
 @EditedEntityContainer("carServiceDc")
 @LoadDataBeforeShow
 public class CarServiceEdit extends StandardEditor<CarService> {
-    private static final Logger log = LoggerFactory.getLogger(CarServiceEdit.class);
     @Inject
     private CityService cityService;
     @Inject
-    private LookupPickerField<City> cityField;
-    @Inject
-    private CollectionContainer<City> citiesDc;
-    @Named("carServiceEditTabSheet.clientsTab")
-    private VBoxLayout clientsTab;
-    @Inject
-    private MessageBundle messageBundle;
-    @Inject
     private TabSheet carServiceEditTabSheet;
+    @Inject
+    private GroupTable<Counterparty> counterpartiesTable;
+    @Inject
+    private UiComponents uiComponents;
+    @Inject
+    private Messages messages;
+    @Inject
+    private CollectionPropertyContainer<Counterparty> counterpartiesDc;
+
+    @Subscribe
+    public void onInit(InitEvent event) {
+        counterpartiesTable.addGeneratedColumn("clientType", new Table.ColumnGenerator<Counterparty>() {
+            @Nullable
+            @Override
+            public Component generateCell(Counterparty entity) {
+                Label<String> label = uiComponents.create(Label.TYPE_STRING);
+                String value = "-";
+                if(entity.getClass() == Legal.class) value = messages.getMessage(getClass(), "clientType.legal");
+                if(entity.getClass() == Individual.class) value = messages.getMessage(getClass(), "clientType.individual");
+                label.setValue(value);
+                return label;
+            }
+        });
+        counterpartiesTable.getColumn("clientType")
+                .setCaption(messages.getMessage(getClass(), "clientType.caption"));
+    }
 
     @Subscribe
     public void onInitEntity(InitEntityEvent<CarService> event) {
@@ -48,8 +62,9 @@ public class CarServiceEdit extends StandardEditor<CarService> {
 
     @Subscribe(id = "counterpartiesDc", target = Target.DATA_CONTAINER)
     public void onCounterpartiesDcCollectionChange(CollectionContainer.CollectionChangeEvent<Counterparty> event) {
-        String newCaption = messageBundle.getMessage("clientsTab.caption") +
-                " (" + event.getSource().getItems().size() + ")";
+        String newCaption = messages.getMessage(getClass(), "clientsTab.caption") + " (" + event.getSource().getItems().size() + ")";
         carServiceEditTabSheet.getTab("clientsTab").setCaption(newCaption);
     }
+
+
 }
