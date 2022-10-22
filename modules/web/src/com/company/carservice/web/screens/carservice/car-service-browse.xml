@@ -25,6 +25,9 @@
                 applyTo="carServicesTable"
                 dataLoader="carServicesDl">
             <properties include=".*"/>
+            <custom name="employeeName" paramClass="com.company.carservice.entity.Employee"
+                    caption="msg://carServiceEmployee.caption" join="{E}.employee employee">
+                <![CDATA[employee.id = ?]]></custom>
         </filter>
         <groupTable id="carServicesTable"
                     width="100%"
