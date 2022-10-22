@@ -44,6 +44,19 @@ public class CarService extends StandardEntity {
     @Composition
     @OneToMany(mappedBy = "carService")
     private List<Repair> repair;
+    @JoinTable(name = "CARSERVICE_COUNTERPARTY_CAR_SERVICE_LINK",
+            joinColumns = @JoinColumn(name = "CAR_SERVICE_ID"),
+            inverseJoinColumns = @JoinColumn(name = "COUNTERPARTY_ID"))
+    @ManyToMany
+    private List<Counterparty> counterparties;
+
+    public List<Counterparty> getCounterparties() {
+        return counterparties;
+    }
+
+    public void setCounterparties(List<Counterparty> counterparties) {
+        this.counterparties = counterparties;
+    }
 
     public List<Repair> getRepair() {
         return repair;

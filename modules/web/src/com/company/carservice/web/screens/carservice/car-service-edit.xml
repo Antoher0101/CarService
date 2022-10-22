@@ -6,11 +6,10 @@
     <data>
         <instance id="carServiceDc"
                   class="com.company.carservice.entity.CarService">
-            <view extends="carService-edit">
-                <property name="city" view="_minimal"/>
-            </view>
+            <view extends="carService-edit"/>
             <loader/>
             <collection id="employeeDc" property="employee"/>
+            <collection id="counterpartiesDc" property="counterparties"/>
         </instance>
         <collection id="citiesDc" class="com.company.carservice.entity.City" view="_minimal">
             <loader id="citiesDl">
@@ -22,41 +21,60 @@
     </data>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="editActions" spacing="true">
-        <form id="form" dataContainer="carServiceDc">
-            <column width="350px">
-                <textField id="nameField" property="name"/>
-                <textField id="addressField" property="address"/>
-                <textField id="phoneNumberField" property="phoneNumber"/>
-                <lookupPickerField id="cityField" optionsContainer="citiesDc" property="city">
+    <layout spacing="true">
+        <tabSheet id="carServiceEditTabSheet">
+            <tab id="carServiceFormTab" caption="msg://carServiceForm.caption" margin="true,false,false,false" spacing="true">
+                <form id="form" dataContainer="carServiceDc">
+                    <column width="350px">
+                        <textField id="nameField" property="name"/>
+                        <textField id="addressField" property="address"/>
+                        <textField id="phoneNumberField" property="phoneNumber"/>
+                        <lookupPickerField id="cityField" optionsContainer="citiesDc" property="city">
+                            <actions>
+                                <action id="lookup" type="picker_lookup"/>
+                                <action id="open" type="picker_open"/>
+                            </actions>
+                        </lookupPickerField>
+                    </column>
+                </form>
+                <groupBox id="employeeBox" caption="msg://com.company.carservice.entity/CarService.employee">
+                    <table id="employeeTable" dataContainer="employeeDc" width="100%" height="200px">
+                        <actions>
+                            <action id="create" type="create"/>
+                            <action id="edit" type="edit"/>
+                            <action id="remove" type="remove"/>
+                        </actions>
+                        <columns>
+                            <column id="firstName"/>
+                            <column id="lastName"/>
+                            <column id="salary"/>
+                            <column id="birthday"/>
+                            <column id="email"/>
+                        </columns>
+                        <buttonsPanel>
+                            <button action="employeeTable.create"/>
+                            <button action="employeeTable.edit"/>
+                            <button action="employeeTable.remove"/>
+                        </buttonsPanel>
+                    </table>
+                </groupBox>
+            </tab>
+            <tab id="clientsTab" spacing="true" margin="true,false,false,false" caption="msg://clientsTab.caption">
+                <groupTable id="counterpartiesTable" width="100%" dataContainer="counterpartiesDc">
                     <actions>
-                        <action id="lookup" type="picker_lookup"/>
-                        <action id="open" type="picker_open"/>
+                        <action id="add" type="add"/>
+                        <action id="edit" type="edit"/>
                     </actions>
-                </lookupPickerField>
-            </column>
-        </form>
-        <groupBox id="employeeBox" caption="msg://com.company.carservice.entity/CarService.employee">
-            <table id="employeeTable" dataContainer="employeeDc" width="100%" height="200px">
-                <actions>
-                    <action id="create" type="create"/>
-                    <action id="edit" type="edit"/>
-                    <action id="remove" type="remove"/>
-                </actions>
-                <columns>
-                    <column id="firstName"/>
-                    <column id="lastName"/>
-                    <column id="salary"/>
-                    <column id="birthday"/>
-                    <column id="email"/>
-                </columns>
-                <buttonsPanel>
-                    <button action="employeeTable.create"/>
-                    <button action="employeeTable.edit"/>
-                    <button action="employeeTable.remove"/>
-                </buttonsPanel>
-            </table>
-        </groupBox>
+                    <buttonsPanel alwaysVisible="true">
+                        <button id="counterpartiesTableAddBtn" action="counterpartiesTable.add"/>
+                        <button id="counterpartiesTableEditBtn" action="counterpartiesTable.edit"/>
+                    </buttonsPanel>
+                    <columns>
+                        <column id="name"/>
+                    </columns>
+                </groupTable>
+            </tab>
+        </tabSheet>
         <hbox id="editActions" spacing="true">
             <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
             <button id="closeBtn" action="windowClose"/>

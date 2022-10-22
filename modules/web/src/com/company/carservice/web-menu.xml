@@ -6,5 +6,6 @@
         <item screen="carservice_Repair.browse" caption="mainMsg://menu_config.carservice_Repair.browse"/>
         <item screen="carservice_Legal.browse" caption="mainMsg://menu_config.carservice_Legal.browse"/>
         <item screen="carservice_Individual.browse" caption="mainMsg://menu_config.carservice_Individual.browse"/>
+        <item screen="carservice_Counterparty.browse" caption="mainMsg://menu_config.carservice_Counterparty.browse"/>
     </menu>
 </menu-config>
