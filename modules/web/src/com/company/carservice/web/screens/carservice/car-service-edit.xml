@@ -70,7 +70,7 @@
                         <button id="counterpartiesTableEditBtn" action="counterpartiesTable.exclude"/>
                     </buttonsPanel>
                     <columns>
-                        <column id="name"/>
+                        <column id="name" caption="msg://name.caption"/>
                     </columns>
                 </groupTable>
             </tab>
