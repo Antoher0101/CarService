@@ -4,6 +4,7 @@ import com.company.carservice.entity.*;
 import com.company.carservice.service.CityService;
 import com.haulmont.cuba.core.global.GlobalConfig;
 import com.haulmont.cuba.core.global.Messages;
+import com.haulmont.cuba.core.global.UserSessionSource;
 import com.haulmont.cuba.gui.UiComponents;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.model.CollectionContainer;
@@ -32,6 +33,8 @@ public class CarServiceEdit extends StandardEditor<CarService> {
     @Inject
     private Messages messages;
     @Inject
+    private UserSessionSource userSessionSource;
+    @Inject
     private CollectionPropertyContainer<Counterparty> counterpartiesDc;
 
     @Subscribe
@@ -50,6 +53,7 @@ public class CarServiceEdit extends StandardEditor<CarService> {
         });
         counterpartiesTable.getColumn("clientType")
                 .setCaption(messages.getMessage(getClass(), "clientType.caption"));
+
     }
 
     @Subscribe
@@ -58,6 +62,8 @@ public class CarServiceEdit extends StandardEditor<CarService> {
 
         if (defaultCity != null)
             event.getEntity().setCity(defaultCity);
+
+        event.getEntity().setCreator(userSessionSource.getUserSession().getUser());
     }
 
     @Subscribe(id = "counterpartiesDc", target = Target.DATA_CONTAINER)

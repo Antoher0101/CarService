@@ -11,6 +11,7 @@
         <property name="city" view="_minimal"/>
         <property name="employee" view="_local"/>
         <property name="counterparties" view="_local"/>
+        <property name="creator" view="_minimal"/>
     </view>
     <view entity="carservice_Repair" name="repair-view" extends="_local">
         <property name="carService" view="_minimal"/>
