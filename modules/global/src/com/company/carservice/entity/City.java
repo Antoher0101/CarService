@@ -6,18 +6,21 @@ import com.haulmont.cuba.core.entity.annotation.PublishEntityChangedEvents;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @PublishEntityChangedEvents
-@Table(name = "CARSERVICE_CITY")
+@Table(name = "CARSERVICE_CITY", indexes = {
+        @Index(name = "IDX_CARSERVICE_CITY_NAME", columnList = "NAME", unique = true)
+})
 @Entity(name = "carservice_City")
 @NamePattern("%s|name")
 public class City extends StandardEntity {
     private static final long serialVersionUID = 4424352755530112832L;
 
     @NotNull
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "NAME", nullable = false, unique = true)
     private String name;
 
     @NotNull
