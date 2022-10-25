@@ -2,8 +2,8 @@ package com.company.carservice.jmx;
 
 import com.company.carservice.entity.Employee;
 import com.haulmont.cuba.core.*;
-import com.haulmont.cuba.core.global.Scripting;
-import com.haulmont.cuba.core.global.TimeSource;
+import com.haulmont.cuba.core.app.EmailerAPI;
+import com.haulmont.cuba.core.global.*;
 import com.haulmont.cuba.core.sys.persistence.DbTypeConverter;
 import groovy.lang.Binding;
 import org.springframework.stereotype.Component;
@@ -23,6 +23,8 @@ public class EmployeeWorker implements EmployeeWorkerMBean {
     private TimeSource timeSource;
     @Inject
     private Scripting scripting;
+    @Inject
+    private EmailerAPI emailerAPI;
 
     @Override
     public void sendGreetings() {
@@ -59,6 +61,16 @@ public class EmployeeWorker implements EmployeeWorkerMBean {
                 binding.setVariable("age", age);
                 binding.setVariable("carServiceName", carServiceName);
                 String greetingMessage = scripting.runGroovyScript("com/company/carservice/GetGreetingMessage.groovy", binding);
+
+                EmailInfo emailInfo = EmailInfoBuilder.create()
+                        .setAddresses(email)
+                        .setCaption("Поздравление с днем рождения")
+                        .setBody(greetingMessage)
+                        .setFrom(null)
+                        .build();
+
+
+                emailerAPI.sendEmailAsync(emailInfo);
             }
         }
     }
