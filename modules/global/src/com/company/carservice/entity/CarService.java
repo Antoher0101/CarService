@@ -6,6 +6,7 @@ import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
 import com.haulmont.cuba.core.entity.annotation.LookupType;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
@@ -34,6 +35,7 @@ public class CarService extends StandardEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "CITY_ID")
     @Lookup(type = LookupType.DROPDOWN, actions = {"lookup", "open"})
+    @OnDeleteInverse(DeletePolicy.DENY)
     private City city;
 
     @OnDelete(DeletePolicy.CASCADE)
@@ -44,6 +46,7 @@ public class CarService extends StandardEntity {
     @Composition
     @OneToMany(mappedBy = "carService")
     private List<Repair> repair;
+
     @JoinTable(name = "CARSERVICE_COUNTERPARTY_CAR_SERVICE_LINK",
             joinColumns = @JoinColumn(name = "CAR_SERVICE_ID"),
             inverseJoinColumns = @JoinColumn(name = "COUNTERPARTY_ID"))
