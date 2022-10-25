@@ -25,17 +25,6 @@ public class CityEdit extends StandardEditor<City> {
 
     @Subscribe
     public void onBeforeCommitChanges(BeforeCommitChangesEvent event) {
-        City editedCity = getEditedEntity();
-        LoadContext<City> context = LoadContext.create(City.class).setQuery(
-                LoadContext.createQuery("select c from carservice_City c where c.defaultCity = true and c <> :changedCity")
-                        .setParameter("changedCity", editedCity));
-        List<City> list =  dataManager.loadList(context);
-        for (City city : list) {
-            city.setDefaultCity(false);
-        }
-        CommitContext commit = new CommitContext();
-        commit.setCommitInstances(list);
-
-        dataManager.commit(commit);
+        
     }
 }
