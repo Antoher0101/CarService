@@ -35,6 +35,7 @@
                                 <action id="open" type="picker_open"/>
                             </actions>
                         </lookupPickerField>
+                        <field property="creator"/>
                     </column>
                 </form>
                 <groupBox id="employeeBox" caption="msg://com.company.carservice.entity/CarService.employee">

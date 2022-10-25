@@ -8,6 +8,7 @@ import com.haulmont.cuba.core.entity.annotation.LookupType;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
+import com.haulmont.cuba.security.entity.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -52,6 +53,18 @@ public class CarService extends StandardEntity {
             inverseJoinColumns = @JoinColumn(name = "COUNTERPARTY_ID"))
     @ManyToMany
     private List<Counterparty> counterparties;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CREATOR_ID")
+    private User creator;
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
 
     public List<Counterparty> getCounterparties() {
         return counterparties;

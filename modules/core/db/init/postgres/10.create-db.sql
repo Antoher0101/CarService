@@ -31,6 +31,7 @@ create table CARSERVICE_CAR_SERVICE (
     ADDRESS varchar(255) not null,
     PHONE_NUMBER varchar(255) not null,
     CITY_ID uuid not null,
+    CREATOR_ID uuid,
     --
     primary key (ID)
 )^
