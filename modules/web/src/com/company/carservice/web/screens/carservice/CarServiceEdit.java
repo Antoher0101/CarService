@@ -68,7 +68,7 @@ public class CarServiceEdit extends StandardEditor<CarService> {
 
     @Subscribe(id = "counterpartiesDc", target = Target.DATA_CONTAINER)
     public void onCounterpartiesDcCollectionChange(CollectionContainer.CollectionChangeEvent<Counterparty> event) {
-        String newCaption = messages.getMessage(getClass(), "clientsTab.caption") + " (" + event.getSource().getItems().size() + ")";
+        String newCaption = messages.formatMessage(getClass(), "clientsTab.caption", event.getSource().getItems().size());
         carServiceEditTabSheet.getTab("clientsTab").setCaption(newCaption);
     }
 
