@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:context="http://www.springframework.org/schema/context">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task">
 
     <!-- Annotation-based beans -->
     <context:component-scan base-package="com.company.carservice"/>
-
+    <task:scheduled-tasks scheduler="scheduler">
+        <task:scheduled ref="cuba_Emailer" method="processQueuedEmails" cron="*/10 * * * * *"/>
+    </task:scheduled-tasks>
 </beans>
